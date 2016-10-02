@@ -5,10 +5,12 @@
 /// <reference path='State/Menu.ts'/>
 /// <reference path='State/Main.ts'/>
 
+/// <reference path='Sprite/Player.ts'/>
+
 module WeddingGame {
   export class Game extends Phaser.Game {
     constructor() {
-      super(640, 480, Phaser.AUTO, 'game-div');
+      super(800, 600, Phaser.AUTO, 'game-div');
 
       this.state.add('boot', State.Boot);
       this.state.add('preload', State.Preload);

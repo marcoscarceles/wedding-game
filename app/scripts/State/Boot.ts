@@ -8,7 +8,7 @@ module WeddingGame.State {
       this.game.stage.backgroundColor = 0xFFFFFF;
 
       // Assign global settings here
-      
+
       this.game.state.start('preload');
     }
   }
