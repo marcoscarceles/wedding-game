@@ -10,8 +10,8 @@ module WeddingGame.State {
 
       // Load remaining assets here
       this.load.image('sky', 'assets/images/sky.png');
-      this.game.load.image('ground', 'assets/images/platform.png');
-      this.load.image('marcos', 'assets/images/marcos.png');
+      this.load.image('ground', 'assets/images/platform.png');
+      this.load.spritesheet('marcos', 'assets/images/marcos.png', 32, 48);
     }
 
     create() {

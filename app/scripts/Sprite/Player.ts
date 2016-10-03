@@ -2,6 +2,8 @@ module WeddingGame.Sprite {
 
     export class Player extends Phaser.Sprite {
 
+        cursors: any;
+
         constructor(game: Phaser.Game, x: number, y: number) {
 
             super(game, x, y, 'marcos', 0);
@@ -21,24 +23,22 @@ module WeddingGame.Sprite {
 
             game.add.existing(this);
 
+            this.cursors = game.input.keyboard.createCursorKeys();
         }
 
         update() {
 
-          var cursors = this.game.input.keyboard.createCursorKeys();
-
-
           //  Reset the players velocity (movement)
           this.body.velocity.x = 0;
 
-          if (cursors.left.isDown)
+          if (this.cursors.left.isDown)
           {
               //  Move to the left
               this.body.velocity.x = -150;
 
               this.animations.play('left');
           }
-          else if (cursors.right.isDown)
+          else if (this.cursors.right.isDown)
           {
               //  Move to the right
               this.body.velocity.x = 150;
@@ -54,7 +54,7 @@ module WeddingGame.Sprite {
           }
 
           //  Allow the player to jump if they are touching the ground.
-          if (cursors.up.isDown && this.body.touching.down)
+          if (this.cursors.up.isDown && this.body.touching.down)
           {
               this.body.velocity.y = -350;
           }

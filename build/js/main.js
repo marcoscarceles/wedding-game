@@ -41,8 +41,8 @@ var WeddingGame;
                 this.load.image('menu-background', 'assets/images/menu-background.png');
                 // Load remaining assets here
                 this.load.image('sky', 'assets/images/sky.png');
-                this.game.load.image('ground', 'assets/images/platform.png');
-                this.load.image('marcos', 'assets/images/marcos.png');
+                this.load.image('ground', 'assets/images/platform.png');
+                this.load.spritesheet('marcos', 'assets/images/marcos.png', 32, 48);
             };
             Preload.prototype.create = function () {
                 this.game.state.start('menu');
@@ -132,17 +132,17 @@ var WeddingGame;
                 this.animations.add('right', [5, 6, 7, 8], 10, true);
                 this.anchor.setTo(0.5, 0);
                 game.add.existing(this);
+                this.cursors = game.input.keyboard.createCursorKeys();
             }
             Player.prototype.update = function () {
-                var cursors = this.game.input.keyboard.createCursorKeys();
                 //  Reset the players velocity (movement)
                 this.body.velocity.x = 0;
-                if (cursors.left.isDown) {
+                if (this.cursors.left.isDown) {
                     //  Move to the left
                     this.body.velocity.x = -150;
                     this.animations.play('left');
                 }
-                else if (cursors.right.isDown) {
+                else if (this.cursors.right.isDown) {
                     //  Move to the right
                     this.body.velocity.x = 150;
                     this.animations.play('right');
@@ -153,7 +153,7 @@ var WeddingGame;
                     this.frame = 4;
                 }
                 //  Allow the player to jump if they are touching the ground.
-                if (cursors.up.isDown && this.body.touching.down) {
+                if (this.cursors.up.isDown && this.body.touching.down) {
                     this.body.velocity.y = -350;
                 }
             };
