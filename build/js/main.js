@@ -116,6 +116,38 @@ var WeddingGame;
 })(WeddingGame || (WeddingGame = {}));
 var WeddingGame;
 (function (WeddingGame) {
+    var State;
+    (function (State) {
+        var Engagement = (function (_super) {
+            __extends(Engagement, _super);
+            function Engagement() {
+                _super.apply(this, arguments);
+            }
+            Engagement.prototype.preload = function () {
+                this.game.forceSingleUpdate = true;
+                this.load.image('eng-bg', 'assets/images/engagement-background.png');
+                this.load.image('eng-mc', 'assets/images/engagement-marcos.png');
+                this.load.image('eng-am', 'assets/images/engagement-arantxa.png');
+                this.load.image('eng-fg', 'assets/images/engagement-foreground.png');
+            };
+            Engagement.prototype.create = function () {
+                var elements = this.game.add.group();
+                var bg = elements.create(0, 0, 'eng-bg');
+                var fg = elements.create(0, 0, 'eng-fg');
+                var amSprite = elements.create(800, 0, 'eng-am');
+                var mcSprite = elements.create(800, 0, 'eng-mc');
+                elements.bringToTop(fg);
+                this.am = this.game.add.tween(amSprite).to({ x: 0 }, 2000, "Quart.easeOut", true);
+                this.mc = this.game.add.tween(mcSprite).to({ x: 0 }, 2000, "Quart.easeOut");
+                this.am.chain(this.mc);
+            };
+            return Engagement;
+        })(Phaser.State);
+        State.Engagement = Engagement;
+    })(State = WeddingGame.State || (WeddingGame.State = {}));
+})(WeddingGame || (WeddingGame = {}));
+var WeddingGame;
+(function (WeddingGame) {
     var Sprite;
     (function (Sprite) {
         var Player = (function (_super) {
@@ -167,6 +199,7 @@ var WeddingGame;
 /// <reference path='State/Preload.ts'/>
 /// <reference path='State/Menu.ts'/>
 /// <reference path='State/Main.ts'/>
+/// <reference path='State/Engagement.ts'/>
 /// <reference path='Sprite/Player.ts'/>
 var WeddingGame;
 (function (WeddingGame) {
@@ -178,6 +211,7 @@ var WeddingGame;
             this.state.add('preload', WeddingGame.State.Preload);
             this.state.add('menu', WeddingGame.State.Menu);
             this.state.add('main', WeddingGame.State.Main);
+            this.state.add('engagement', WeddingGame.State.Engagement);
             this.state.start('boot');
         }
         return Game;
