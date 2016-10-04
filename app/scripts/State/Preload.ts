@@ -11,7 +11,8 @@ module WeddingGame.State {
       // Load remaining assets here
       this.load.image('sky', 'assets/images/sky.png');
       this.load.image('ground', 'assets/images/platform.png');
-      this.load.spritesheet('marcos', 'assets/images/marcos.png', 32, 48);
+      this.load.spritesheet('marcos', 'assets/images/character-sprite.png', 64, 64, 16);
+      this.load.spritesheet('arantxa', 'assets/images/character-sprite-arantxa.png', 64, 64, 16);
     }
 
     create() {

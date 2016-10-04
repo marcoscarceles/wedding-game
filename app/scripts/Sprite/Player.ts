@@ -6,7 +6,7 @@ module WeddingGame.Sprite {
 
         constructor(game: Phaser.Game, x: number, y: number) {
 
-            super(game, x, y, 'marcos', 0);
+            super(game, x, y, 'arantxa', 0);
 
             game.physics.arcade.enable(this);
 
@@ -15,9 +15,11 @@ module WeddingGame.Sprite {
             this.body.gravity.y = 300;
             this.body.collideWorldBounds = true;
 
-            //  Our two animations, walking left and right.
-            this.animations.add('left', [0, 1, 2, 3], 10, true);
-            this.animations.add('right', [5, 6, 7, 8], 10, true);
+            //  Our animations
+            this.animations.add('front', [0, 1, 2, 3], 10, true);
+            this.animations.add('right', [4, 5, 6, 7], 10, true);
+            this.animations.add('back', [8, 9, 10, 11], 10, true);
+            this.animations.add('left', [12, 13, 14, 15], 10, true);
 
             this.anchor.setTo(0.5, 0);
 
@@ -50,7 +52,7 @@ module WeddingGame.Sprite {
               //  Stand still
               this.animations.stop();
 
-              this.frame = 4;
+              this.frame = 0;
           }
 
           //  Allow the player to jump if they are touching the ground.
