@@ -2,7 +2,10 @@ module WeddingGame.State {
   export class Main extends Phaser.State {
 
     platforms: Phaser.Group;
-    player: Phaser.Sprite;
+    arantxa: WeddingGame.Sprite.Player;
+    marcos: WeddingGame.Sprite.Player;
+    atom: Phaser.Sprite;
+    layer: Phaser.TilemapLayer;
 
     create() {
 
@@ -10,40 +13,41 @@ module WeddingGame.State {
       this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
       //  A simple background for our game
-      this.game.add.sprite(0, 0, 'sky');
+      this.add.sprite(0, 0, 'faculty-bg');
 
-      //  The platforms group contains the ground and the 2 ledges we can jump on
-      this.platforms = this. game.add.group();
+      // The players and their settings
+      this.arantxa = new Sprite.Player(this.game, 32, this.world.centerY, 'arantxa');
+      this.marcos = new Sprite.Player(this.game, this.world.width-32, this.world.centerY, 'marcos', true);
 
-      //  We will enable physics for any object that is created in this group
-      this.platforms.enableBody = true;
+      //Items
+      this.atom = this.add.sprite(this.world.centerX, this.world.bottom - 300, 'atom');
+      this.atom.anchor.setTo(0.5, 0.5);
+      this.atom.scale.setTo(0.5, 0.5);
+      this.game.physics.arcade.enable(this.atom);
 
-      // Here we create the ground.
-      var ground = this.platforms.create(0, this.game.world.height - 64, 'ground');
-
-      //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-      ground.scale.setTo(2, 2);
-
-      //  This stops it from falling away when you jump on it
-      ground.body.immovable = true;
-
-      //  Now let's create two ledges
-      let ledge = this.platforms.create(400, 400, 'ground');
-
-      ledge.body.immovable = true;
-
-      ledge = this.platforms.create(-150, 250, 'ground');
-
-      ledge.body.immovable = true;
-
-      // The player and its settings
-      this.player = new Sprite.Player(this.game, 32, this.game.world.height - 150);
+      //Map
+      var map = this.add.tilemap('faculty-map');
+      map.addTilesetImage('tiny-quest', 'faculty-tiles');
+      this. layer = map.createLayer('main');
+      this.layer.resizeWorld();
+      map.setCollisionBetween(49, 62);
 
     }
 
     update() {
       //  Collide the player and the stars with the platforms
-      var hitPlatform = this.game.physics.arcade.collide(this.player, this.platforms);
+      this.game.physics.arcade.collide(this.arantxa, this.layer);
+      this.game.physics.arcade.collide(this.marcos, this.layer);
+      this.game.physics.arcade.collide(this.arantxa, this.marcos);
+
+      this.game.physics.arcade.overlap(this.arantxa, this.atom, this.collectAtom, null, this);
+      this.game.physics.arcade.overlap(this.marcos, this.atom, this.collectAtom, null, this);
+
+      this.atom.angle += 3;
+    }
+
+    collectAtom() {
+      this.atom.kill();
     }
   }
 }
