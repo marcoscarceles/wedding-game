@@ -5,7 +5,7 @@ module WeddingGame.State {
     }
 
     create() {
-      this.game.stage.backgroundColor = 0xFFFFFF;
+      this.game.stage.backgroundColor = 0x000000;
 
       // Assign global settings here
 

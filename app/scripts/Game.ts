@@ -11,7 +11,7 @@
 module WeddingGame {
   export class Game extends Phaser.Game {
     constructor() {
-      super(800, 600, Phaser.AUTO, 'game-div');
+      super(1024, 768, Phaser.AUTO, 'game-div');
 
       this.state.add('boot', State.Boot);
       this.state.add('preload', State.Preload);
