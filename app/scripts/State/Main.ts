@@ -16,8 +16,8 @@ module WeddingGame.State {
       this.add.sprite(0, 0, 'faculty-bg');
 
       // The players and their settings
-      this.arantxa = new Sprite.Player(this.game, 32, this.world.centerY, 'arantxa');
-      this.marcos = new Sprite.Player(this.game, this.world.width-32, this.world.centerY, 'marcos', true);
+      this.arantxa = new Sprite.Player(this.game, 32, this.world.bottom - 300, 'arantxa');
+      this.marcos = new Sprite.Player(this.game, this.world.width-32, this.world.bottom - 300, 'marcos', true);
 
       //Items
       this.atom = this.add.sprite(this.world.centerX, this.world.bottom - 300, 'atom');
